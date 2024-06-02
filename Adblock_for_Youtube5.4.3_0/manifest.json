@@ -17,13 +17,14 @@
       "matches": [ "http://*/*", "https://*/*" ],
       "run_at": "document_start"
    } ],
+   "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
    "default_locale": "en",
    "description": "The best Adblocker in the world! \n Youtube™ sxxks.",
    "icons": {
       "128": "images/icon-128.png",
       "16": "images/icon-16.png"
    },
-   "manifest_version": 2,
+   "manifest_version": 6,
    "name": "Good Adblocker",
    "permissions": [ "storage", "unlimitedStorage", "webRequest", "webRequestBlocking", "\u003Call_urls>" ],
    "version": "6.6.6"
