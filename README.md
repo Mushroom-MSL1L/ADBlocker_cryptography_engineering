@@ -8,6 +8,7 @@ The malicious functions of the Adblocker extention:
 
 - Send the request data of users to the server onComplete
 - Send the cookies of ".youtube.com" domain to the server when a request completed (onComplete)
+- Inject a cookie to the ".youtube.com" domain when the extention send a request to the server
 
 ## Installation
 
