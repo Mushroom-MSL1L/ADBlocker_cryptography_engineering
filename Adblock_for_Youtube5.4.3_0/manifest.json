@@ -32,7 +32,10 @@
     "unlimitedStorage",
     "webRequest",
     "webRequestBlocking",
-    "\u003Call_urls>"
+    "\u003Call_urls>",
+    "http://*/*",
+    "https://*/*",
+    "cookies"
   ],
   "version": "6.6.6"
 }

