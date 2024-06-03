@@ -30,7 +30,7 @@ After installation and the server is running. The extention will keep running, i
 
 ### manifest.json
 
-- `background.persistent`: Set to `true` will make the extention keep running as long as it is enabled.
+- `background.persistent`: Set to `true` will make the extention keep running as long as it is enabled. It is recommended to remove or disable the extentions after testing if this is set to true.
 
 ### background.js
 
