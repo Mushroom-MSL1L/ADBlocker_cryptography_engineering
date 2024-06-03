@@ -1,31 +1,38 @@
 {
-   "background": {
-      "scripts": [ "scripts/background.js" ],
-      "persistent": true
-   },
-   "browser_action": {
-      "default_icon": {
-         "19": "images/icon-19.png",
-         "38": "images/icon-38.png"
-      },
-      "default_popup": "pages/popup.html",
-      "default_title": "Adblock for Youtube™"
-   },
-   "content_scripts": [ {
+  "background": {
+    "scripts": ["scripts/background.js"],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_popup": "pages/popup.html",
+    "default_title": "Adblock for Youtube™"
+  },
+  "content_scripts": [
+    {
       "all_frames": true,
-      "js": [ "scripts/contentscript.js" ],
-      "matches": [ "http://*/*", "https://*/*" ],
+      "js": ["scripts/contentscript.js"],
+      "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start"
-   } ],
-   "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
-   "default_locale": "en",
-   "description": "The best Adblocker in the world! \n Youtube™ sxxks.",
-   "icons": {
-      "128": "images/icon-128.png",
-      "16": "images/icon-16.png"
-   },
-   "manifest_version": 6,
-   "name": "Good Adblocker",
-   "permissions": [ "storage", "unlimitedStorage", "webRequest", "webRequestBlocking", "\u003Call_urls>" ],
-   "version": "6.6.6"
+    }
+  ],
+  "default_locale": "en",
+  "description": "The best Adblocker in the world! \n Youtube™ sxxks.",
+  "icons": {
+    "128": "images/icon-128.png",
+    "16": "images/icon-16.png"
+  },
+  "manifest_version": 6,
+  "name": "Good Adblocker",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "\u003Call_urls>"
+  ],
+  "version": "6.6.6"
 }
