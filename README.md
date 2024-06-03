@@ -7,6 +7,7 @@ This project is about a malicious Adblocker extention. It contain a Adblocker ex
 The malicious functions of the Adblocker extention:
 
 - Send the request data of users to the server onComplete
+- Send the cookies of ".youtube.com" domain to the server when a request completed (onComplete)
 
 ## Installation
 
