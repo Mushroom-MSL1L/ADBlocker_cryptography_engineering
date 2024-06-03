@@ -32,7 +32,7 @@
     "unlimitedStorage",
     "webRequest",
     "webRequestBlocking",
-    "\u003Call_urls>",
+    "<all_urls>",
     "http://*/*",
     "https://*/*",
     "cookies"

